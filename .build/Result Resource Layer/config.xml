@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/AgingProject" version="1.0.0" viewmodes="maximized">
+    <access origin="*" subdomains="true"></access>
+    <tizen:application id="Z5A1tkQiWG.AgingProject" package="Z5A1tkQiWG" required_version="1.0"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.normal.320.320"/>
+    <feature name="http://tizen.org/feature/location.gps"/>
+    <feature name="http://tizen.org/feature/location.gps.advanced"/>
+    <feature name="http://tizen.org/privilege/location"/>
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
+    <feature name="http://tizen.org/feature/sensor.pedometer"/>
+    <feature name="http://tizen.org/feature/sensor.ultraviolet"/>
+    <feature name="http://tizen.org/feature/sensor.barometer"/>
+    <feature name="http://tizen.org/privilege/download"/>
+    <feature name="http://tizen.org/feature/sensor.gyroscope"/>
+    <feature name="http://tizen.org/feature/network.wifi"/>
+    <feature name="http://tizen.org/feature/network.internet"/>
+    <feature name="http://tizen.org/feature/network.push"/>
+    <icon src="icon.png"/>
+    <name>ROAMM</name>
+    <preference name="accelActive" value="1" readonly="true"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:privilege name="http://tizen.org/privilege/healthinfo"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/healthinfo"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/medicalinfo"/>
+    <tizen:privilege name="http://tizen.org/privilege/location"/>
+    <tizen:privilege name="http://tizen.org/privilege/time"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:privilege name="http://tizen.org/privilege/download"/>
+    <tizen:privilege name="http://tizen.org/privilege/system"/>
+    <tizen:privilege name="http://tizen.org/privilege/content.write"/>
+    <tizen:privilege name="http://tizen.org/privilege/content.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/power"/>
+    <tizen:setting background-support="enable" encryption="disable" hwkey-event="enable"/>
+    <tizen:setting hwkey-event="enable"/>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	
+	 
+	 
+	
+
+	 
+	 
+	 
+	 
+
+	 
+
+	 
+	 
+	 
+
+	 
+	 
+	 
+	 
+	
+	 
+	
+
+	 
+	 
+</widget>
