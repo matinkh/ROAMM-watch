@@ -1,4 +1,5 @@
 function startSensors(){
+	console.log("[MATIN] sensors started...");
 	// get the config file
 	$.getJSON("https://cise.ufl.edu/~snair/getConfig.php", function(json){
 		console.log("Got settings");

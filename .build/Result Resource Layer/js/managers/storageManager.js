@@ -14,6 +14,7 @@ function Item(){
 	this.pressure = null;
 	this.timestamp = null;
 	this.battery = null;
+	this.watchID = null;
 }
 
 // used to format timestamps into a postgres database friendly format
@@ -247,6 +248,30 @@ function storeData(){
 	*/
 	var item = Object.create(Item.prototype);
 
+	// Getting Watch ID
+	tizen.systeminfo.getPropertyValue("BUILD", function (build) {
+	    //console.log("[Matin] Model: (" + build.model + ") -- Manufacturer: (" + build.manufacturer + ") -- Version: (" + build.buildVersion + ")");
+	    if ("sessionStorage" in window) {
+			sessionStorage.setItem("com.uf.agingproject.watchID", build.model + "-" + build.buildVersion);
+		}
+		else {
+			console.log("no sessionStorage in window");
+		}
+	}, function (error) {
+	    console.log("An error occurred " + error.message);
+	});
+	
+	/*
+	 * Sadly, this DUID is not supported for the watch!
+	 * Otherwise, it would be the perfect solution.
+	 * 
+	var cap = tizen.systeminfo.getCapabilities();
+	console.log("Or this damn thing: " + cap.DUID);
+	console.log("Or this damn thing: " + cap.platformName);
+	console.log("Or this damn thing: " + cap.nativeApiVersion);
+	*/
+	// Getting Watch ID
+	
 	item.steps = sessionStorage.getItem("com.uf.agingproject.steps");
 	item.heartrate = sessionStorage.getItem("com.uf.agingproject.heartrate");
 	item.accelX = sessionStorage.getItem("com.uf.agingproject.accelX");
@@ -264,6 +289,11 @@ function storeData(){
 	item.pressure = sessionStorage.getItem("com.uf.agingproject.pressure");
 
 	item.battery = sessionStorage.getItem("com.uf.agingproject.battery");
+
+	item.watchID = sessionStorage.getItem("com.uf.agingproject.watchID");
+	//console.log("[Matin] Watch-ID is: " + sessionStorage.getItem("com.uf.agingproject.watchID"));
+	
+	
 	
 	// clears data in sessionstorage
 	clearSessionData();
@@ -298,7 +328,7 @@ function startLocalStorageInterval(){
 
 	window.setInterval(function(){
 		storeData();
-	}, rate);
+	}, 10);
 }
 
 var database;
@@ -337,6 +367,7 @@ function clearDB(){
 	
 	var onsuccess = function(){
 		console.log("Local Store Cleared");
+		alert("Proceed to the next experiment.");
 	}
 	
 	var onerror = function(error){
@@ -377,4 +408,12 @@ function getDatabase(){
 }
 
 
-
+function onBuildSuccessCallback(build) {
+    console.log("Model: (" + build.model + ") -- Manufacturer: (" + build.manufacturer + ") -- Version: (" + build.buildVersion + ")");
+    if ("sessionStorage" in window) {
+		sessionStorage.setItem("com.uf.agingproject.watchID", build.model);
+	}
+	else {
+		console.log("no sessionStorage in window");
+	}
+}

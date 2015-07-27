@@ -12,6 +12,10 @@
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>c4LzpTGH1IKIztVYxi16vSQT5qOEq050rHChIZqipsM=</DigestValue>
+</Reference>
+<Reference URI="icon_b.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>vPjxjOppORd6hn9Bw4sh06gqtDoJzoFbV/8e9FyIdvk=</DigestValue>
 </Reference>
 <Reference URI="index.html">
@@ -20,7 +24,7 @@
 </Reference>
 <Reference URI="js%2Fapp.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>PSs1/Y6ljSy5yQHPjcL6kBC+auXQNDbNJA3rJtxpZmE=</DigestValue>
+<DigestValue>zqmum6bgiuSvEyh8yQIQm+j3Yug852TWb9iShC21cAA=</DigestValue>
 </Reference>
 <Reference URI="js%2Fidb%2Fidbstore.min.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -36,23 +40,23 @@
 </Reference>
 <Reference URI="js%2FlowBatteryCheck.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>4omjer2+1trCDH/Sn4wedWBjYgW0h/XnzORrCF2Es9k=</DigestValue>
+<DigestValue>vnftXnCGrpRSgFRYhkM79gqPK+gmhOjC1UsL+O0pOfc=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmanagers%2FexportManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>+/BB06jgbDd80NA21QoOG9Cbm82D8DxeDbyzxlsP3fs=</DigestValue>
+<DigestValue>235waDLbn5KLOxfu0MqkVX3lezaYENk4QHJ0/AC3WAw=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmanagers%2FsensorManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>zYTN32VRqxkxdDRT2I4MShEPZWOUi+XMWl/Cj2xzvbo=</DigestValue>
+<DigestValue>Iyo/pEOmTfUBG16uriGWP5kIiINOSOXoih02+IY1wNM=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmanagers%2FstorageManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>7hzwFz7Fw7jmz9r+El2RhHKmkBAibVFLQQ+3pzL102k=</DigestValue>
+<DigestValue>HIINHSWir2FDrqs3hFemxJ+3P6DhCBgR+A9ZHm58d2k=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Faccel.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Ki2q2yMSMMxhnkftvos9ofGZLWoLna6wnbKnVMaEf7Y=</DigestValue>
+<DigestValue>EbI2eD/+x8L3vU9VM2HQpUV2YE30/jpKkVD1npnIhgw=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Fbattery.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -2555,11 +2559,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-GDh9qKsoAw8aS6WJh4FNbduL901RssshVTnAy1Zu+utoGNy4HMKjpHUQ2FY57uWiyQ+Mq8UOp3eK
-dzKr4/gFTAAnm59C9jBNwWRgT9ntOsFx6MbvkpZtA6C3/ZUgh8XIC01xNxBfHcEQZwDe/y+2TdWz
-LcZVzU1PuC6CoVgUwmr9PYSteYZt6DJYg2B2AYKz+c05QR0Z+kgkNd3tZ3CEdqDevYxL0oGqKVeG
-RKg9gbCzWVVaMYVGGE4FTEFez7j39dQ4HB56Hee3feCe+bB/fmT69Mq2XADrgQ7nkZkBdIeH9wzT
-b2pGannHsDh8Z21wWy62s/RB7GgM0pM2W31hhQ==
+Rll/A39PiO0SF/rq3pzoKdqaWXn5GlQkOj42W7nBVZlCTUv+QacTDwU+DjQyUIdJNxJvHBZeIXvU
+J38zgWaY8jsiiVo9vLR/at3b/7D0Q828lhc+lUcEcVZvtrPtC57OGwMoSVChspHsOOoz49RsmKrf
+SkmVva/YHmllItUYb4BzoVo+GlGf2L0U+x6TaZX7G3g7nIJw/L6XmVKL6Z6NTiLk3MRpOTjKtofO
+F4ZJNlvSZYZQ40hUqrAs/1RFr1r0O5e2jtT+JRMdExgVWYiOGtCAsyPlf3Hcxu0tRrjs78XB1UsT
+yhfQPcAudmrPODCJX5p8tQxR6NT4lWcqnCY+cA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

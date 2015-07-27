@@ -4,7 +4,7 @@
 		systeminfo: null,
 
 		lowThreshold : 0.04,
-
+		
 		listenBatteryLowState: function(){
 			var self = this;
 			try {
