@@ -326,9 +326,10 @@ function startLocalStorageInterval(){
 	var rate =  parseInt(localStorage.getItem("com.uf.agingproject.exportRate"));
 	console.log("setting interval of local storage to " + rate);
 
+	// 33ms means 30Hz sampling rate
 	window.setInterval(function(){
 		storeData();
-	}, 10);
+	}, 33);
 }
 
 var database;
