@@ -14,7 +14,7 @@ function batchSendLocalData11(){
 			globalData = array;
 			console.log("[Matin] I GOT HERE! x2");
 			writeDataLocally();
-			batchSendLocalData_andClearStorageAfterwards();
+			//batchSendLocalData_andClearStorageAfterwards();
 			// Matin
 
 			// Old send data. Worked for happy scenario only. Should be removed if the above code works.

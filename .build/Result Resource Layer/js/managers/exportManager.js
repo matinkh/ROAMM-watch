@@ -14,7 +14,7 @@ function batchSendLocalData11(){
 			globalData = array;
 			console.log("[Matin] I GOT HERE! x2");
 			writeDataLocally();
-			batchSendLocalData_andClearStorageAfterwards();
+			//batchSendLocalData_andClearStorageAfterwards();
 			// Matin
 
 			// Old send data. Worked for happy scenario only. Should be removed if the above code works.
@@ -186,7 +186,7 @@ function writeDataToFile(newFile) {
 				fs.write(JSON.stringify(dataToFile));
 				console.log("[Matin] this is the data to be written>>>\n" + JSON.stringify(dataToFile));
 				fs.close();
-				dataToFile = null;
+				//dataToFile = null;
 				newFile = null;
 				console.log("[Matin] Data is written into the file, and temporal variables are set to null.");
 			};

@@ -41,7 +41,6 @@ function startAccel() {
 	};
 	
 	window.addEventListener('devicemotion', function(e){
-		console.log("[Matin] Captured acceleromter values: X (" + e.accelerationIncludingGravity.x + ") - Y (" + e.accelerationIncludingGravity.y + ") - Z (" + e.accelerationIncludingGravity.z + ")");
 		saveAccel([e.accelerationIncludingGravity.x, e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.z]);
 		handleAccelData(
 				e.accelerationIncludingGravity.x,
@@ -59,8 +58,6 @@ function startAccel() {
 		rate = parseInt(store);
 	}
 	var interval = window.setInterval(function(){
-		console.log("[Matin] Updating accelerometer's values.");
-		console.log("[Matin] tempX (" + tempx + ") - tempY (" + tempy + ") - tempZ (" + tempz + ")");
 		document.getElementById("accel").innerHTML = (tempx+"").substring(0,4) + "," + (tempy+"").substring(0,4) + "," + (tempz+"").substring(0,4);
 		
 		//console.log(accelArray);

@@ -2,5 +2,5 @@
 #add
 #modify
 res/wgt/author-signature.xml
-res/wgt/js/sensors/accel.js
+res/wgt/js/managers/exportManager.js
 res/wgt/signature1.xml
