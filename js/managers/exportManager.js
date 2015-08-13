@@ -185,6 +185,7 @@ function writeDataToFile(newFile) {
 			function onOpenStream(fs) {
 				fs.write(JSON.stringify(dataToFile));
 				console.log("[Matin] this is the data to be written>>>\n" + JSON.stringify(dataToFile));
+				console.log("[Matin] Or this >>>\n" + JSON.stringify(globalData));
 				fs.close();
 				//dataToFile = null;
 				newFile = null;

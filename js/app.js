@@ -24,8 +24,6 @@ $(document).ready(function(){
 	console.log("[MATIN] Local DB is being created.");
 	createDBUsingWrapper();
 
-	clearDBIteratively();
-	
 	// retrieves the config file from the server and starts all sensors
 	console.log("[MATIN] Requesting sensors to start.");
 	startSensors();
