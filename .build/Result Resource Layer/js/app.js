@@ -24,7 +24,7 @@ $(document).ready(function(){
 	// get a reference to the IDB database that holds all permanent local data
 	console.log("[MATIN] Local DB is being created.");
 	createDBUsingWrapper();
-	
+	clearDB();
 	// retrieves the config file from the server and starts all sensors
 	console.log("[MATIN] Requesting sensors to start.");
 	startSensors();
