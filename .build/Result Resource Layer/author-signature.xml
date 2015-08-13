@@ -28,7 +28,7 @@
 </Reference>
 <Reference URI="js%2Fapp.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>+FXONLRC91I+O3Uv9YQjEQUM4UriLspjReSrHKMwZao=</DigestValue>
+<DigestValue>Z0OFF/u4WBcnM1u2xqW7COE2W2uzk68YdKHcrY1og0c=</DigestValue>
 </Reference>
 <Reference URI="js%2Fidb%2Fidbstore.min.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -48,7 +48,7 @@
 </Reference>
 <Reference URI="js%2Fmanagers%2FexportManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>JlYMoti55JoeotAOCS5AkyziR4S2oP/4FBiKJsCa8a0=</DigestValue>
+<DigestValue>Gd5rmVuCxy3KYtZ/SeDVJjntYVbtZL+bnLlfKi9RpFU=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmanagers%2FsensorManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -56,7 +56,7 @@
 </Reference>
 <Reference URI="js%2Fmanagers%2FstorageManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>epw8BCaHIVQp1ijwHV9NIVr1fwpjdNUcwuNo6g5UHT0=</DigestValue>
+<DigestValue>SI5i4m4xRDWa9A1ZkVZALSOjOhtb9dY9imKyrpVKYys=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Faccel.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -2563,11 +2563,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-aL+lapsCe0kb6FlcilYrstgNrn4r6W62cPdlGK47RmnfxcBxBhbjTl5psUsUhWpzWdueBT5FYPNq
-vkMCoOWUouSHsPfOR5SlVjxQDhFLUk0NNJCKsPenU0Y58+kprgvNnB2GN/kHM6foXtD2pXkL5Xgb
-0uheoEZol1n+fW5QqMj3DM8jt34Fh8WDWnjT5xtMYPwfsd7NvdNKWsPd7COl98hu4uI23wD/ENMy
-QK8+A+BBCVaUEU+lxl6hXbg7VW7ND9dDoKi5IJ6FrHKG00NRy8SnYtocGYQF3md7X8+lyf+F+vc5
-s+BSzTh1mQIY0vqiYgnOUiPwVjZh7cge4TBktw==
+fkwOc9tCOikFeHwh6vOjC5O9OKmEyZ7zynsCSpB40hZEmb/WSiqOn+lNg2Cf+B9xHLeoxzObUVoa
+6vbkLEWdH6Ng5hCjHeaokZmmGqjVfYAoKc0ELuXAQAmJhrhg/Mmdi6RBRhVcx8kGqispBxM8iiKp
+HB5YJD1a9NsD0QgXwnsqePDkIXu80MF+0oT/27pGeC1xXmvLaY60SiEbUgOS8KV2RtjEG+ae1gxI
+NSjHdKuX09+OX/dcRktxzuCKcZt1UuMKroCWR1x0BxRY+3xZT1cqdoBs4bSuLPo8sWSDkiMxStbo
+xTiHhI4TVGNhiVIBievnIr8fbO+7oHfMI8mt4A==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

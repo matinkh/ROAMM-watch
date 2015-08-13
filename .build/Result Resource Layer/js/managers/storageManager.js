@@ -418,3 +418,55 @@ function onBuildSuccessCallback(build) {
 		console.log("no sessionStorage in window");
 	}
 }
+
+/**
+ * <b>An alternative to {@link #clearDB()}.</b><br>
+ * Retrieves all the data from local database, and remove them <i>k-</i>item at a time from it.<br>
+ * <i>Note: this function is written to address the problem with {@link #clearDB()}.</i>
+ * @author matinkheirkhahan
+ */
+function clearDBIteratively() {
+	var k = 150;
+	console.log("[MATIN] K is set to " + k + ".");
+	var database = getDatabase();
+	/*database.deleteDatabase(function(){}, function(error){
+		console.log("[MATIN] error in deleting the database. " + error);
+	});*/
+	var onsuccess = function(retrivedArray){
+		console.log("[MATIN] clearDBItertively has started.");
+		clearDBRecursively(retrivedArray, k);
+		console.log("[MATIN] Clearing DB in iterative mode complete");
+	},
+
+	onerror = function(error){
+		console.log(error);
+	};
+
+	database.getAll(onsuccess, onerror);
+}
+
+/**
+ * <b>Private Function.</b>::Used in {@link #clearDBIteratively}.<br><br>
+ * Recursively selects <i>k</i> rows and deletes them from the database.
+ * @param retrivedArray
+ * @author matinkheirkhahan
+ */
+function clearDBRecursively(retrivedArray, k) {
+	if (retrivedArray.length == 0){
+		console.log("[MATIN] (clearDBRecursively) no more data to delete from database.");
+		return;
+	}
+
+	var dataArray = [];
+
+	while(dataArray.length < k && retrivedArray.length > 0){
+		dataArray.push(retrivedArray[0]);
+		retrivedArray.shift();
+	}
+	database.removeBatch(dataArray, function(){
+		console.log("[MATIN] A data array was removed from database (batch mode).");
+	}, function(error) {
+		console.log("[MATIN] data array could not be removed (batch mode). " + error);
+	});
+	clearDBRecursively(retrivedArray, k);
+}

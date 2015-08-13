@@ -4,7 +4,6 @@ $(document).ready(function(){
 	// Make it so swiping down from the top closes the app
 	document.addEventListener('tizenhwkey', function(e) {
 		if(e.keyName == "back"){
-			clearDB();
 			tizen.application.getCurrentApplication().exit();
 		}
 	});
@@ -24,7 +23,9 @@ $(document).ready(function(){
 	// get a reference to the IDB database that holds all permanent local data
 	console.log("[MATIN] Local DB is being created.");
 	createDBUsingWrapper();
-	clearDB();
+
+	clearDBIteratively();
+	
 	// retrieves the config file from the server and starts all sensors
 	console.log("[MATIN] Requesting sensors to start.");
 	startSensors();

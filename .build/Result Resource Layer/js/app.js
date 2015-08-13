@@ -4,7 +4,6 @@ $(document).ready(function(){
 	// Make it so swiping down from the top closes the app
 	document.addEventListener('tizenhwkey', function(e) {
 		if(e.keyName == "back"){
-			clearDB();
 			tizen.application.getCurrentApplication().exit();
 		}
 	});
