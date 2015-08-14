@@ -32,7 +32,7 @@ function formatLocalDate() {
 	+ 'T' + pad(now.getHours())
 	+ ':' + pad(now.getMinutes()) 
 	+ ':' + pad(now.getSeconds()) 
-	+ '.' + pad(now.getMilliseconds())
+//	+ '.' + pad(now.getMilliseconds())
 	+ dif + pad(tzo / 60) 
 	+ ':' + pad(tzo % 60);
 }
@@ -325,12 +325,13 @@ function storeData(){
 //move data stored in sessionStorage to localStorage every x seconds
 function startLocalStorageInterval(){
 	var rate =  parseInt(localStorage.getItem("com.uf.agingproject.exportRate"));
+	var manualRate = 10 * 60 * 1000; // Sample at every minute
 	console.log("setting interval of local storage to " + rate);
 
 	// 33ms means 30Hz sampling rate
 	window.setInterval(function(){
 		storeData();
-	}, 33);
+	}, manualRate);
 }
 
 var database;
@@ -369,7 +370,7 @@ function clearDB(){
 	
 	var onsuccess = function(){
 		console.log("Local Store Cleared");
-		alert("Proceed to the next experiment.");
+		//alert("Proceed to the next experiment.");
 	}
 	
 	var onerror = function(error){
