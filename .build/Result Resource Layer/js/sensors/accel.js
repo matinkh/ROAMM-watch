@@ -56,7 +56,8 @@ function startAccel() {
 	if(store){
 		rate = parseInt(store);
 	}
-	var manualAccelRate = 10 * 60 * 1000;
+	//TODO: [Epoch length] Change the following line
+	var manualAccelRate = 1000;
 	var interval = window.setInterval(function(){
 		document.getElementById("accel").innerHTML = (tempx+"").substring(0,4) + "," + (tempy+"").substring(0,4) + "," + (tempz+"").substring(0,4);
 		

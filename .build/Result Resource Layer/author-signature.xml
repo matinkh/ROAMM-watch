@@ -56,11 +56,11 @@
 </Reference>
 <Reference URI="js%2Fmanagers%2FstorageManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CZSFw89Ypf2rjITAAIytgnvyxohAMbtJ2D97A/gsZtw=</DigestValue>
+<DigestValue>R+qzM63ZtaangWP78xwqHlNNwRXQC7k7eOIewfX8crA=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Faccel.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GVpQ+llWmV1xrzRww+e9BYABcxB+apKWJ6MmUGE9X6I=</DigestValue>
+<DigestValue>PG9QwczEr8UCJeWp25UofzDXDluUZctxO/UVX4I69lc=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Fbattery.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -2563,11 +2563,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-ZXcc4JImjL0Au4t/W7mvZuNvlaS/QPlutha5TGWJ3T35JejVAeXU8EzwNkXZIrJs6mVcfZ9QosVi
-j8isZmpJR7oAOGQxb96LQ4zhUgbiF7+6OzCiG2JZqX6TmEbBwoQERl2NZGVPLBc4ICEHqgkEuDy0
-gHAoO0LCXmBm+wOLSkdruHPtcDgMDYggkh/I8D6uGWU+fqzQkRfNSAtSagUtao/kTctCJ5sDgI8y
-GpuoCbu5HyVLYhRQ5uqgL9QSy+Hou1fsgoU+KZCVa6CZwYpSSz8RBTzCLgGrIHLShnpPT0yQ6aRv
-/1na800JCw+dDA+fNDBaZLCPdobDjylNWGT0nA==
+QGfFwOd9CdejFFsZUK8PZ7JNLHOjLjbwZoH5bYGz+uXhWLFmERZ8xTSMlo8BETR8mufgjYe1K+iB
+azAb5J2DNjrlt5gDGtpxZDVQ6OT1rjJFzZaQ4cGLUGtDQUJDXS1LuUN9DBDdhd6kBLTWG3VQj4Qq
+l42IniSpj2h/5Rmx32ptNaWx0DfjXsLz3VIfn4wBp0/MjJuefvfsGYmF94/QNF6t7N/moPQNn1OU
+s+/tLSrL1bFUaAKWwLzahGW6VzZy4IsLtT+xetlSHPgcASAnRdHBJJ/dhZKG7wY2ssCS1zuuJH/X
+d0eqTe2L4jrR0PT43YSifvVO5Cob8yE1fGhqMQ==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

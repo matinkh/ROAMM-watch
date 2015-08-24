@@ -8,7 +8,7 @@
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CgExWFOzvFeKQ/XStagrZaLzPMzlFXJ9uInsYTiXHy8=</DigestValue>
+<DigestValue>meecKUzgXiCD7Z+Vrwn/yAXRP4+Ok+U37/ItSHRHRAA=</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -60,11 +60,11 @@
 </Reference>
 <Reference URI="js%2Fmanagers%2FstorageManager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CZSFw89Ypf2rjITAAIytgnvyxohAMbtJ2D97A/gsZtw=</DigestValue>
+<DigestValue>R+qzM63ZtaangWP78xwqHlNNwRXQC7k7eOIewfX8crA=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Faccel.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GVpQ+llWmV1xrzRww+e9BYABcxB+apKWJ6MmUGE9X6I=</DigestValue>
+<DigestValue>PG9QwczEr8UCJeWp25UofzDXDluUZctxO/UVX4I69lc=</DigestValue>
 </Reference>
 <Reference URI="js%2Fsensors%2Fbattery.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -2567,11 +2567,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-K1o5OBL3gGBxA9rYfIA75UZO8LFkqimisNjB99ACtfPMXrqBae337xtJDuiibc42bjbnNxJRFH/o
-AOES8v+7JaeYE2OUU0TG8ujALTZnePuF1Olx5BAwRCG9y9IdeBP9XgCzcD35C/RODs+uOcr848AF
-o55R6LSWqGqUxgA27Tb4T5EjOLWgDDz6oI9EjVvYvqo/wSOLJVKT6Ua5E9/bTlbDHhimX4ms0+OF
-YEUkiv+ZKY6cD77Cbr4Fkmtu5DIohLgI6gnV9gM2ZQpQU+Qn5HNffy+EhBKA4p7H+h8J2AHdY0j4
-208ezmn1NhPYcA4g8wAUpQSESHC9TyF8i+ErJQ==
+WBfoxpwzb22wwFlrkAdbgK6SyFfuILB88hVbvSnMtVIf3IcYvpColT+vM4026YkQGsNnaJnGF3/A
+1s+lrU6PeFX8rc0DSQ7OhE6wJFC0p4N7aQpuU+LOBZhK9Va/OXAwoyjCmj/PMZq63CcSfg3r9jzf
+Q15bm2uekUXeA+Ws0BqjayLcPu6i7ID5jlQ/5kj+k1iLiUeZ93rKU4EBnmkFVulbbT2U3mIaIaPu
+cfRC4D56HX6a38XYA5tH3I0WWir7s55WCMOfJnUliTUoLlv2qBVYlvExmM/A+zkw9CrOmHNsWo1C
+4M2PZygXOmOvJdJTQBX9HPa5VkTlA9FXwdtsGg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
