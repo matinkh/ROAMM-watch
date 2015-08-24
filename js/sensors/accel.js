@@ -57,6 +57,8 @@ function startAccel() {
 	if(store){
 		rate = parseInt(store);
 	}
+	//TODO: [Epoch length] Change the following line
+	var manualAccelRate = 1000;
 	var interval = window.setInterval(function(){
 		document.getElementById("accel").innerHTML = (tempx+"").substring(0,4) + "," + (tempy+"").substring(0,4) + "," + (tempz+"").substring(0,4);
 		
@@ -77,7 +79,7 @@ function startAccel() {
 		tempy = 0;
 		tempz = 0;
 		count = 0;
-	}, rate);
+	}, manualAccelRate);
 	
 	sessionStorage.setItem("com.uf.agingproject.accelInterval", interval);
 	

@@ -10,7 +10,7 @@ function batchSendLocalData11(){
 		var onsuccess = function(array){
 			// Matin
 			console.log("[Matin] I GOT HERE! x1");
-			dataToFile = array;//array.slice();
+			dataToFile = array.slice();
 			globalData = array;
 			console.log("[Matin] I GOT HERE! x2");
 			writeDataLocally();
@@ -18,9 +18,9 @@ function batchSendLocalData11(){
 			// Matin
 
 			// Old send data. Worked for happy scenario only. Should be removed if the above code works.
-			/*globalData = array;
+			globalData = array;
 			clearDB();
-			batchSendLocalData2();*/
+			//batchSendLocalData2();
 		},
 
 		onerror = function(error){
@@ -184,10 +184,10 @@ function writeDataToFile(newFile) {
 
 			function onOpenStream(fs) {
 				fs.write(JSON.stringify(dataToFile));
-				console.log("[Matin] this is the data to be written>>>\n" + JSON.stringify(dataToFile));
-				console.log("[Matin] Or this >>>\n" + JSON.stringify(globalData));
+				console.log("[Matin] this is the data to be written [dataToFile]>>>\n" + JSON.stringify(dataToFile));
+				console.log("[Matin] OR this [globalData]>>>\n" + JSON.stringify(globalData));
 				fs.close();
-				//dataToFile = null;
+				dataToFile = null;
 				newFile = null;
 				console.log("[Matin] Data is written into the file, and temporal variables are set to null.");
 			};
@@ -195,7 +195,7 @@ function writeDataToFile(newFile) {
 			console.log("[Matin] no file here to write into!...");
 		}
 		console.log("[Matin] writeDataToFile ended!!!");
-		clearDB();
+		//clearDB();
 	} catch (exception) {
 		console.log("[Matin] [Exception] " + exception.message);
 	}

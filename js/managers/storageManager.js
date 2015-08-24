@@ -325,12 +325,14 @@ function storeData(){
 //move data stored in sessionStorage to localStorage every x seconds
 function startLocalStorageInterval(){
 	var rate =  parseInt(localStorage.getItem("com.uf.agingproject.exportRate"));
+	//TODO: [Epoch Length] Change the following line
+	var manualRate = 33; // 30Hz
 	console.log("setting interval of local storage to " + rate);
 
 	// 33ms means 30Hz sampling rate
 	window.setInterval(function(){
 		storeData();
-	}, 33);
+	}, manualRate);
 }
 
 var database;
