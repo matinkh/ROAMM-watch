@@ -69,7 +69,7 @@ function startAccel() {
 			saveAccel([tempx, tempy, tempz]);
 		*/
 		calculateAxisRMS_clearArrays();
-		//saveAccel([xRMS, yRMS, zRMS]);
+		saveAccel([xRMS, yRMS, zRMS]);
 		
 		// clear buffer and reset values
 		accelArray = [];
