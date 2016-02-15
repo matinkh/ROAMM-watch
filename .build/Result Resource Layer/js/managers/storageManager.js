@@ -326,7 +326,7 @@ function storeData(){
 function startLocalStorageInterval(){
 	var rate =  parseInt(localStorage.getItem("com.uf.agingproject.exportRate"));
 	//TODO: [Epoch Length] Change the following line
-	var manualRate = 1000; // Sample at every second
+	var manualRate = 60 * 1000; // Sample at every second
 	console.log("setting interval of local storage to " + rate);
 
 	// 33ms means 30Hz sampling rate

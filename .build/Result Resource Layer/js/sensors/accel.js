@@ -57,7 +57,7 @@ function startAccel() {
 		rate = parseInt(store);
 	}
 	//TODO: [Epoch length] Change the following line
-	var manualAccelRate = 1000;
+	var manualAccelRate = 60 * 1000;
 	var interval = window.setInterval(function(){
 		document.getElementById("accel").innerHTML = (tempx+"").substring(0,4) + "," + (tempy+"").substring(0,4) + "," + (tempz+"").substring(0,4);
 		
@@ -69,7 +69,7 @@ function startAccel() {
 			saveAccel([tempx, tempy, tempz]);
 		*/
 		calculateAxisRMS_clearArrays();
-		//saveAccel([xRMS, yRMS, zRMS]);
+		saveAccel([xRMS, yRMS, zRMS]);
 		
 		// clear buffer and reset values
 		accelArray = [];
