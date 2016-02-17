@@ -26,7 +26,7 @@ function startAccel() {
 		zArray.push(z);
 		/*
 		 * Matin
-		 * The below code can be removed. But since we do not have a conrol version mechanism here, I keep them for now.
+		 * The below code can be removed. But since we do not have a control version mechanism here, I keep them for now.
 		 */
 		
 		// keep a running average of all the values retrieved by the sensor
@@ -36,6 +36,7 @@ function startAccel() {
 		
 		// trying to also buffer the data
 		// have not had much success, cant efficiently then store all the values to the local storage
+		// This is now being used for realtime frequency analysis
 		accelArray.push({timestamp:new Date(),x:x,y:y,z:z});
 		
 	};
@@ -51,7 +52,7 @@ function startAccel() {
 	});
 	
 	var rate = 1000,
-	// The rate set on the portal is in milliseconds
+	// The rate set on the web portal is in milliseconds
 	store = localStorage.getItem("com.uf.agingproject.accelRate");
 	if(store){
 		rate = parseInt(store);
@@ -72,7 +73,8 @@ function startAccel() {
 		saveAccel([xRMS, yRMS, zRMS]);
 		
 		// clear buffer and reset values
-		accelArray = [];
+		// Done in FFT interval function now
+		//accelArray = [];
 		
 		tempx = 0;
 		tempy = 0;
@@ -80,7 +82,27 @@ function startAccel() {
 		count = 0;
 	}, manualAccelRate);
 	
+	
+	/**
+	 * Sanjay
+	 * February 15th 2016
+	 * Function to perform DSP in real time every 15 seconds
+	 */ 
+	var fftInterval = window.setInterval(function(){
+		var tempData = accelArray.slice();
+		accelArray = [];
+		var complex = generateComplexArray(getVectorMagnitudes(tempData));
+		
+		complex.FFT();
+		
+		// TODO
+		// Analysis functions below
+		
+		
+	}, 15000);
+	
 	sessionStorage.setItem("com.uf.agingproject.accelInterval", interval);
+	sessionStorage.setItem("com.uf.agingproject.accelFftInterval", fftInterval);
 	
 }
 
@@ -91,7 +113,7 @@ function startAccel() {
  */
 function calculateAxisRMS_clearArrays() {
 	var xSquaredVal = [];
-	for (i = 0; i < xArray.length; i++) {
+	for (var i = 0; i < xArray.length; i++) {
 		xSquaredVal.push(xArray[i] * xArray[i]);
 	}
 	xRMS = Math.sqrt(calculateAverage(xSquaredVal));
@@ -133,6 +155,38 @@ function calculateAverage(arr) {
 		return sum/arr.length;
 	return 0;
 }
+
+
+/**
+ * Sanjay
+ * February 15th 2016
+ * Returns array of vector magnitudes of input data array containing {x,y,z}
+ */
+function getVectorMagnitudes(data){
+    var output = [];
+
+    for(var i = 0; i <= data.length; i++){
+        if(data[i]){
+            output.push(Math.sqrt(Math.pow(data[i].x,2) + Math.pow(data[i].y,2) + Math.pow(data[i].z,2)))
+        }
+    }
+
+    return output;
+}
+
+/**
+ * Sanjay
+ * February 15th 2016
+ * Convert array of real values into complex array of complex values
+*/
+function generateComplexArray(data){
+	var output = new complex_array.ComplexArray(data.length);
+    output.map(function(value, i, n) {
+      value.real = data[i];
+    });
+}
+
+
 function stopAccel(){
 	clearInterval(parseInt(sessionStorage.getItem("com.uf.agingproject.accelInterval")));
 	document.getElementById("accel").innerHTML = "OFF";
