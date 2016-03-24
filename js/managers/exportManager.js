@@ -53,7 +53,7 @@ function batchSendLocalData2() {
 	
 	console.log(sendingArray);
 
-	$.post("https://cise.ufl.edu/~snair/consumedata.php",
+	$.post(URL_POST_DATA,
 			{
 		data : JSON.stringify(sendingArray)
 			}, 

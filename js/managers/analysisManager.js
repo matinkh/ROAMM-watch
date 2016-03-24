@@ -13,13 +13,18 @@ var P625 = [];
 var ONE_EIGHTY_OVER_PI = 180 / Math.PI;
 var POINTS_IN_WINDOW = 450;
 
+/**
+ * 
+ * @param rawData {timestamp:Date, x:float, y:float, z:float}
+ * @returns
+ */
 function processData(rawData) {
 
-    var vms = [];
-    var strength = [];
-    var frequencies = [];
-    var dfIdx = -1;
-    var xs = [];
+    var vms = [], 
+    strength = [],
+    frequencies = [],
+    dfIdx = -1,
+    xs = [];
 
     for (var i = 0; i < rawData.length; i++) {
         xs.push(rawData[i].x);
@@ -99,6 +104,31 @@ function runAnalysis(xs, vms, strength, frequencies) {
     console.log(output);
 
     return output;
+}
+
+function averageOverLargeWindow(features){
+	var avgFeatures = new Features();
+	var numItems = features.length;
+	
+	for(var i = 0; i < features.length; i++){
+		avgFeatures.mvm += features[i].mvm;
+		avgFeatures.sdvm += features[i].sdvm;
+		avgFeatures.mangle += features[i].mangle;
+		avgFeatures.sdangle += features[i].sdangle;
+		avgFeatures.p625 += features[i].p625;
+		avgFeatures.df += features[i].df;
+		avgFeatures.fpdf += features[i].fpdf;
+	}
+	
+	avgFeatures.mvm = avgFeatures.mvm/numItems;
+	avgFeatures.sdvm = avgFeatures.sdvm/numItems;
+	avgFeatures.mangle = avgFeatures.mangle/numItems;
+	avgFeatures.sdangle = avgFeatures.sdangle/numItems;
+	avgFeatures.p625 = avgFeatures.p625/numItems;
+	avgFeatures.df = avgFeatures.df/numItems;
+	avgFeatures.fpdf = avgFeatures.fpdf/numItems;
+	
+	return avgFeatures;
 }
 
 function sum(arr) {

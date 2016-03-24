@@ -1,4 +1,3 @@
-var tempx=0,tempy=0,tempz=0,
 count = 0;
 var accelArray = [];
 
@@ -17,27 +16,17 @@ var xRMS = 0, yRMS = 0, zRMS = 0;
 function startAccel() {
 		
 	var handleAccelData = function(x, y, z){
-		//document.getElementById("accel").innerHTML = (x+"").substring(0,4) + "," + (y+"").substring(0,4) + "," + (z+"").substring(0,4);
-		//saveAccel([x, y, z]);
+		document.getElementById("accel").innerHTML = (x+"").substring(0,4) + "," + (y+"").substring(0,4) + "," + (z+"").substring(0,4);
 		count++;
 		
 		xArray.push(x);
 		yArray.push(y);
 		zArray.push(z);
-		/*
-		 * Matin
-		 * The below code can be removed. But since we do not have a control version mechanism here, I keep them for now.
-		 */
-		
-		// keep a running average of all the values retrieved by the sensor
-		tempx = ((tempx*(count-1)) + x)/count;
-		tempy = ((tempy*(count-1)) + y)/count;
-		tempz = ((tempz*(count-1)) + z)/count;
 		
 		// trying to also buffer the data
 		// have not had much success, cant efficiently then store all the values to the local storage
 		// This is now being used for realtime frequency analysis
-		accelArray.push({timestamp:new Date(),x:x,y:y,z:z});
+		//accelArray.push({timestamp:new Date(),x:x,y:y,z:z});
 		
 	};
 	
@@ -48,61 +37,67 @@ function startAccel() {
 				e.accelerationIncludingGravity.z
 		);
 	}, function(error) {
-		console.log("[Matin] Error on DEVICE-MOTION: " + error);
+		console.log("Error on DEVICE-MOTION: " + error);
 	});
 	
-	var rate = 1000,
+	var rate = 100,
 	// The rate set on the web portal is in milliseconds
 	store = localStorage.getItem("com.uf.agingproject.accelRate");
 	if(store){
 		rate = parseInt(store);
 	}
-	//TODO: [Epoch length] Change the following line
-	var manualAccelRate = 60 * 1000;
+	
+	// Get RAW acceleration at 10Hz
 	var interval = window.setInterval(function(){
 		document.getElementById("accel").innerHTML = (tempx+"").substring(0,4) + "," + (tempy+"").substring(0,4) + "," + (tempz+"").substring(0,4);
 		
-		//console.log(accelArray);
-		
-		/*
-		 * Matin
-		 * So instead of the average values, RMS values are put into the local database.
-			saveAccel([tempx, tempy, tempz]);
-		*/
 		calculateAxisRMS_clearArrays();
 		saveAccel([xRMS, yRMS, zRMS]);
 		
-		// clear buffer and reset values
-		// Done in FFT interval function now
-		//accelArray = [];
+		accelArray.push({timestamp:new Date(),x:xRMS,y:yRMS,z:zRMS});
 		
-		tempx = 0;
-		tempy = 0;
-		tempz = 0;
 		count = 0;
-	}, manualAccelRate);
+	}, rate);
 	
-	
-	/**
-	 * Sanjay
-	 * February 15th 2016
-	 * Function to perform DSP in real time every 15 seconds
-	 */ 
+	// perform DSP in real time every 15 seconds
 	var fftInterval = window.setInterval(function(){
 		var tempData = accelArray.slice();
 		accelArray = [];
-		var complex = generateComplexArray(getVectorMagnitudes(tempData));
 		
-		complex.FFT();
+		// to analysisManager
+		var features = processData(tempData);
 		
-		// TODO
-		// Analysis functions below
+		addFeatureItemToDB(features);
 		
+	}, SMALL_WINDOW_INTERVAL);
+	
+	
+	// Average features computed over 15 minute interval and save to main DB
+	var featureInterval = window.setInterval(function(){
 		
-	}, 15000);
+		fdb = getFeatureDatabase();
+		
+		var onsuccess = function(array){
+			var avgFeatures = averageOverLargeWindow(array);
+			
+			var item = new Item();
+			item.features = avgFeatures;
+			
+			addToDB(item);
+			
+			clearFeatureDB();
+		},
+		onerror = function(error){
+			console.log(error);
+		};
+		
+		fdb.getAll(onsuccess,onerror);
+		
+	}, LARGE_WINDOW_INTERVAL);
 	
 	sessionStorage.setItem("com.uf.agingproject.accelInterval", interval);
 	sessionStorage.setItem("com.uf.agingproject.accelFftInterval", fftInterval);
+	sessionStorage.setItem("com.uf.agingproject.featureInterval", featureInterval);
 	
 }
 
