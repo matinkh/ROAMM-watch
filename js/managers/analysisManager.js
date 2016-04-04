@@ -19,6 +19,8 @@ var POINTS_IN_WINDOW = 450;
  * @returns
  */
 function processData(rawData) {
+	
+	console.log(rawData);
 
     var vms = [], 
     strength = [],
@@ -67,7 +69,7 @@ function processData(rawData) {
     frequencies = frequencies.splice(0, Math.ceil(frequencies.length / 2));
     strength = strength.splice(0, Math.ceil(strength.length / 2));
 
-    console.log(frequencies[frequencies.length-1]);
+//    console.log(frequencies[frequencies.length-1]);
 
     // Remove first element to eliminate DC
     strength.shift();
@@ -92,13 +94,13 @@ function runAnalysis(xs, vms, strength, frequencies) {
     var f7_fpdf = getFpdf(strength, DF_IDX);
 
     var output = {
-        f1: f1_avgVectorMagnitudes,
-        f2: f2_stdDevVectorMagnitudes,
-        f3: f3_mangle,
-        f4: f4_sdAngle,
-        f5: f5_p625,
-        f6: f6_df,
-        f7: f7_fpdf
+        f1_mvm: f1_avgVectorMagnitudes,
+        f2_sdvm: f2_stdDevVectorMagnitudes,
+        f3_mangle: f3_mangle,
+        f4_sdangle: f4_sdAngle,
+        f5_p625: f5_p625,
+        f6_df: f6_df,
+        f7_fpdf: f7_fpdf
     };
 
     console.log(output);
@@ -171,14 +173,14 @@ function getP625(freqs, mags) {
     var twoPoint5Hz = getClosestIndexRight(freqs, 2.5);
     var fiveHz = getClosestIndexLeft(freqs, 5);
 
-    console.log(point6Hz, twoPoint5Hz, fiveHz);
-    console.log(freqs[point6Hz], freqs[twoPoint5Hz], freqs[fiveHz]);
-    console.log(freqs[point6Hz+1], freqs[twoPoint5Hz-1], freqs[fiveHz+1]);
+//    console.log(point6Hz, twoPoint5Hz, fiveHz);
+//    console.log(freqs[point6Hz], freqs[twoPoint5Hz], freqs[fiveHz]);
+//    console.log(freqs[point6Hz+1], freqs[twoPoint5Hz-1], freqs[fiveHz+1]);
 
     var numerator = sum(_.slice(mags, point6Hz, twoPoint5Hz - 1));
     var denominator = sum(mags, 0, fiveHz - 1);
 
-    console.log("numerator", numerator, "denominator", denominator);
+//    console.log("numerator", numerator, "denominator", denominator);
 
     P625.push({
         numerator: numerator,
@@ -223,8 +225,6 @@ function getFpdf(mags, dfIdx) {
     while (i < mags.length && i - dfIdx < 3) {
         numSum += mags[i++];
     }
-
-    console.log(numSum, sumStrength);
 
     return numSum / sumStrength;
 

@@ -281,6 +281,18 @@ function printAllData(){
 	RAW_DATABASE.getAll(onsuccess,onerror);
 }
 
+function printAllFeatureData(){
+	var onsuccess = function(array){
+		console.log(array);
+		console.log(JSON.stringify(array));
+	},
+	onerror = function(error){
+		console.log(error);
+	};
+	
+	FEATURE_DATABASE.getAll(onsuccess,onerror);
+}
+
 // print how many values are stored in local storage to the console
 function printDataCount(){
 	var onsuccess = function(array){

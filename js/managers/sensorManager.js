@@ -24,7 +24,7 @@ function startSensors(){
 		// for each sensor, check if it is specified to be active and if so, start it
 		// each start routine is defined in the respective sensor's js file
 		
-		if(json.accel_active == "true"){
+		if(json.accel_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.accelInterval")){
 				startAccel();
 			}
@@ -33,7 +33,7 @@ function startSensors(){
 			stopAccel();
 		}
 
-		if(json.gyro_active == "true"){
+		if(json.gyro_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.gyroInterval")){
 				startGyro();
 			}
@@ -42,16 +42,7 @@ function startSensors(){
 			stopGyro();
 		}
 
-		if(json.pedo_active == "true"){
-			if(!sessionStorage.getItem("com.uf.agingproject.pedoInterval")){
-				startPedo();
-			}
-		}
-		else{
-			stopPedo();
-		}
-
-		if(json.heartrate_active == "true"){
+		if(json.heartrate_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.heartrateInterval")){
 				startHeartrate();
 			}
@@ -60,7 +51,7 @@ function startSensors(){
 			stopHeartrate();
 		}
 
-		if(json.location_active == "true"){
+		if(json.location_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.gpsInterval")){
 				startGPS();
 			}
@@ -70,7 +61,7 @@ function startSensors(){
 		}
 
 
-		if(json.battery_active == "true"){
+		if(json.battery_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.batteryInterval")){
 				startBattery();
 			}

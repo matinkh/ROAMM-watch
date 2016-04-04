@@ -49,7 +49,6 @@ function startAccel() {
 	
 	// Get RAW acceleration at 10Hz
 	var interval = window.setInterval(function(){
-		document.getElementById("accel").innerHTML = (tempx+"").substring(0,4) + "," + (tempy+"").substring(0,4) + "," + (tempz+"").substring(0,4);
 		
 		calculateAxisRMS_clearArrays();
 		saveAccel([xRMS, yRMS, zRMS]);
