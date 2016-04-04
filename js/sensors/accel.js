@@ -13,6 +13,8 @@ var yArray = [];
 var zArray = [];
 var xRMS = 0, yRMS = 0, zRMS = 0;
 
+var largeWindow = [];
+
 function startAccel() {
 		
 	var handleAccelData = function(x, y, z){
@@ -40,12 +42,12 @@ function startAccel() {
 		console.log("Error on DEVICE-MOTION: " + error);
 	});
 	
-	var rate = 100,
+	var rate = 100;
 	// The rate set on the web portal is in milliseconds
-	store = localStorage.getItem("com.uf.agingproject.accelRate");
-	if(store){
-		rate = parseInt(store);
-	}
+//	store = localStorage.getItem("com.uf.agingproject.accelRate");
+//	if(store){
+//		rate = parseInt(store);
+//	}
 	
 	// Get RAW acceleration at 10Hz
 	var interval = window.setInterval(function(){
@@ -53,7 +55,12 @@ function startAccel() {
 		calculateAxisRMS_clearArrays();
 		saveAccel([xRMS, yRMS, zRMS]);
 		
-		accelArray.push({timestamp:new Date(),x:xRMS,y:yRMS,z:zRMS});
+		var rawItem = {timestamp:new Date(),x:xRMS,y:yRMS,z:zRMS}
+		
+		accelArray.push(rawItem);
+		
+		// DEBUG saving raw values alongside features
+		addToDB(rawItem);
 		
 		count = 0;
 	}, rate);
@@ -63,10 +70,15 @@ function startAccel() {
 		var tempData = accelArray.slice();
 		accelArray = [];
 		
+		console.log(tempData.length, "raw accel values");
+		
 		// to analysisManager
 		var features = processData(tempData);
 		
-		addFeatureItemToDB(features);
+		// TODO remove this, small window features should only be stored in temporary array
+		addTempFeatureItemToDB(features);
+		
+		largeWindow.push(features);
 		
 	}, SMALL_WINDOW_INTERVAL);
 	
@@ -74,23 +86,19 @@ function startAccel() {
 	// Average features computed over 15 minute interval and save to main DB
 	var featureInterval = window.setInterval(function(){
 		
-		fdb = getFeatureDatabase();
+		var tempLargeWindow = largeWindow.slice();
+		largeWindow = [];
 		
-		var onsuccess = function(array){
-			var avgFeatures = averageOverLargeWindow(array);
-			
-			var item = new Item();
-			item.features = avgFeatures;
-			
-			addToDB(item);
-			
-			clearFeatureDB();
-		},
-		onerror = function(error){
-			console.log(error);
-		};
+		console.log(tempLargeWindow.length, "small feature windows");
 		
-		fdb.getAll(onsuccess,onerror);
+		var avgFeatures = averageOverLargeWindow(tempLargeWindow);
+		
+		console.log(avgFeatures);
+		
+		var item = new Item();
+		item.features = avgFeatures;
+		
+		addFeatureItemToDB(item);
 		
 	}, LARGE_WINDOW_INTERVAL);
 	
@@ -196,5 +204,37 @@ function calibrateAccel(){
 	offsetZ = 9.8 - tempz;
 	
 	console.log("offsets: " + offsetX + "," + offsetY + "," + offsetZ);
+}
+
+
+//DEBUG only called from command line when debugging
+function saveRawAndFeatureDataToFile(){
+	var rawDB = getDatabase(),
+	featureDB = getFeatureDatabase(),
+	tempFeatureDB = getTempFeatureDatabase(),
+	
+	onsuccessRaw = function(array){
+		console.log("writing raw data to file");
+		writeDatabasesToFile(array, "rawData");
+	},
+	onsuccessFeature = function(array){
+		console.log("writing feature data to file");
+		writeDatabasesToFile(array, "featureData");
+	},
+	onsuccessTempFeature = function(array){
+		console.log("writing temp feature data to file");
+		writeDatabasesToFile(array, "tempFeatureData");
+	},
+	onerror = function(error){
+		console.log("failed to get DB");
+	};
+	
+	rawDB.getAll(onsuccessRaw, onerror);
+	featureDB.getAll(onsuccessFeature, onerror);
+	tempFeatureDB.getAll(onsuccessTempFeature, onerror);
+	
+	clearDB();
+	clearFeatureDB();
+	clearTempFeatureDB();
 }
 

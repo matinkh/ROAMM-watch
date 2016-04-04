@@ -19,10 +19,10 @@ $(document).ready(function(){
 	console.log("ROAMM app started.");
 	
 	// tap the screen to send local data
-	$('.ui-page').on("click", function(){
-		console.log("sending local data to remote server");
-		batchSendLocalData11();
-	});
+//	$('.ui-page').on("click", function(){
+//		console.log("sending local data to remote server");
+//		batchSendLocalData11();
+//	});
 
 	// get a reference to the IDB database that holds all permanent local data
 	console.log("Local DB is being created");
@@ -45,7 +45,7 @@ $(document).ready(function(){
 		}
 	},3600000);
 	
-	// need this so app runs it the background interrupted
+	// need this so app runs it the background uninterrupted
 	tizen.power.request("CPU", "CPU_AWAKE");
 	
 	// sanity check to make sure no crashes in between

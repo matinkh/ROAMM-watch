@@ -8,7 +8,7 @@ var FREQUENCIES = [];
 var ONE_EIGHTY_OVER_PI = 180 / Math.PI;
 var dfIdx = -1;
 
-var P625 = [];
+//var P625 = [];
 
 var ONE_EIGHTY_OVER_PI = 180 / Math.PI;
 var POINTS_IN_WINDOW = 450;
@@ -20,7 +20,7 @@ var POINTS_IN_WINDOW = 450;
  */
 function processData(rawData) {
 	
-	console.log(rawData);
+	//console.log(rawData);
 
     var vms = [], 
     strength = [],
@@ -32,7 +32,7 @@ function processData(rawData) {
         xs.push(rawData[i].x);
     }
 
-    console.log("Begin process");
+    console.log("Begin feature extraction process");
 
     // Compute vector magnitudes of all raw data
     for (var i = 0; i < rawData.length; ++i) {
@@ -40,14 +40,14 @@ function processData(rawData) {
     }
 
     // Convert vm's into complex array for processing
-    console.log("Converting to complex array");
+    //console.log("Converting to complex array");
 
     var data = new complex_array.ComplexArray(vms.length);
     data.map(function(value, i, n) {
         value.real = vms[i];
     });
 
-    console.log("Performing FFT");
+    //console.log("Performing FFT");
 
     // Perform FFT
     var fftResult = data.FFT();
@@ -69,11 +69,13 @@ function processData(rawData) {
     frequencies = frequencies.splice(0, Math.ceil(frequencies.length / 2));
     strength = strength.splice(0, Math.ceil(strength.length / 2));
 
-//    console.log(frequencies[frequencies.length-1]);
+//    console.log("number of frequencies", frequencies[frequencies.length-1]);
 
     // Remove first element to eliminate DC
     strength.shift();
     frequencies.shift();
+    
+    //console.log(frequencies);
 
     return runAnalysis(xs, vms, strength, frequencies);
 }
@@ -92,16 +94,18 @@ function runAnalysis(xs, vms, strength, frequencies) {
     var f6_df = getDominantFrequency(frequencies, strength);
 
     var f7_fpdf = getFpdf(strength, DF_IDX);
-
-    var output = {
-        f1_mvm: f1_avgVectorMagnitudes,
-        f2_sdvm: f2_stdDevVectorMagnitudes,
-        f3_mangle: f3_mangle,
-        f4_sdangle: f4_sdAngle,
-        f5_p625: f5_p625,
-        f6_df: f6_df,
-        f7_fpdf: f7_fpdf
-    };
+    
+    var output = new Features();
+    
+    output.mvm = f1_avgVectorMagnitudes;
+    output.sdvm = f2_stdDevVectorMagnitudes;
+    output.mangle = f3_mangle;
+    output.sdangle = f4_sdAngle;
+    output.p625 = f5_p625;
+    output.df = f6_df;
+    output.fpdf = f7_fpdf;
+    output.largeWindow = false;
+    output.timestamp = new Date();
 
     console.log(output);
 
@@ -109,17 +113,37 @@ function runAnalysis(xs, vms, strength, frequencies) {
 }
 
 function averageOverLargeWindow(features){
+	
+	console.log("performing large window feature aggregation");
+	
 	var avgFeatures = new Features();
 	var numItems = features.length;
 	
+	console.log(features);
+	
 	for(var i = 0; i < features.length; i++){
-		avgFeatures.mvm += features[i].mvm;
-		avgFeatures.sdvm += features[i].sdvm;
-		avgFeatures.mangle += features[i].mangle;
-		avgFeatures.sdangle += features[i].sdangle;
-		avgFeatures.p625 += features[i].p625;
-		avgFeatures.df += features[i].df;
-		avgFeatures.fpdf += features[i].fpdf;
+		console.log(features[i]);
+		if(features[i].mvm){
+			avgFeatures.mvm += features[i].mvm;
+		}
+		if(features[i].sdvm){
+			avgFeatures.sdvm += features[i].sdvm;
+		}
+		if(features[i].mangle){
+			avgFeatures.mangle += features[i].mangle;
+		}
+		if(features[i].sdangle){
+			avgFeatures.sdangle += features[i].sdangle;
+		}
+		if(features[i].p625){
+			avgFeatures.p625 += features[i].p625;
+		}
+		if(features[i].df){
+			avgFeatures.df += features[i].df;
+		}
+		if(features[i].fpdf){
+			avgFeatures.fpdf += features[i].fpdf;
+		}
 	}
 	
 	avgFeatures.mvm = avgFeatures.mvm/numItems;
@@ -129,6 +153,8 @@ function averageOverLargeWindow(features){
 	avgFeatures.p625 = avgFeatures.p625/numItems;
 	avgFeatures.df = avgFeatures.df/numItems;
 	avgFeatures.fpdf = avgFeatures.fpdf/numItems;
+	avgFeatures.largeWindow = true;
+	avgFeatures.timestamp = new Date();
 	
 	return avgFeatures;
 }
@@ -178,17 +204,17 @@ function getP625(freqs, mags) {
 //    console.log(freqs[point6Hz+1], freqs[twoPoint5Hz-1], freqs[fiveHz+1]);
 
     var numerator = sum(_.slice(mags, point6Hz, twoPoint5Hz - 1));
-    var denominator = sum(mags, 0, fiveHz - 1);
+    var denominator = sum(mags);
 
 //    console.log("numerator", numerator, "denominator", denominator);
 
-    P625.push({
-        numerator: numerator,
-        denominator: denominator,
-        point6_magnitude: mags[point6Hz],
-        twoPoint5_magnitude: mags[twoPoint5Hz],
-        five_magnitude: mags[fiveHz]
-    });
+//    P625.push({
+//        numerator: numerator,
+//        denominator: denominator,
+//        point6_magnitude: mags[point6Hz],
+//        twoPoint5_magnitude: mags[twoPoint5Hz],
+//        five_magnitude: mags[fiveHz]
+//    });
 
     return (numerator / denominator);
 }

@@ -2,6 +2,9 @@
 var RAW_DATABASE;
 var FEATURE_DATABASE;
 
+// TODO remove, this is only for validation of smallwindow values
+var TEMP_FEATURE_DATABASE;
+
 function Features(){
 	this.mvm = null;
 	this.sdvm = null;
@@ -10,6 +13,8 @@ function Features(){
 	this.p625 = null;
 	this.df = null;
 	this.fpdf = null;
+	this.largeWindow = null;
+	this.timestamp = null;
 }
 
 // Structure of a single data item
@@ -210,6 +215,17 @@ function createDBUsingWrapper(){
 			console.log('FEATURE_DATABASE ready!');
 		}
 	});
+	
+	// TODO remove
+	TEMP_FEATURE_DATABASE = new IDBStore({
+		dbVersion: 1,
+		storeName: 'temp_features',
+		keyPath: 'id',
+		autoIncrement: true,
+		onStoreReady: function(){
+			console.log('TEMP_FEATURE_DATABASE ready!');
+		}
+	});
 }
 
 // insert a single item to the database
@@ -236,10 +252,22 @@ function addFeatureItemToDB(item){
 	FEATURE_DATABASE.put(item, onsuccess, onerror);
 }
 
+// TODO remove
+function addTempFeatureItemToDB(item){
+	var onsuccess = function(id){
+		//console.log('Data is added: ' + id);
+	}
+	var onerror = function(error){
+		console.log('Error', error);
+	}
+ 
+	TEMP_FEATURE_DATABASE.put(item, onsuccess, onerror);
+}
+
 // clears all items in the database
 // called by export manager after a successful transfer
 function clearDB(){
-	console.log("Clearing Local Storage");
+	console.log("Clearing raw Storage");
 	
 	var onsuccess = function(){
 		console.log("Local Store Cleared");
@@ -266,6 +294,27 @@ function clearFeatureDB(){
 	}	
 	
 	FEATURE_DATABASE.clear(onsuccess, onerror);
+}
+
+function clearTempFeatureDB(){
+	console.log("Clearing temp feature Storage");
+	
+	var onsuccess = function(){
+		console.log("Temp Feature Store Cleared");
+	}
+
+	var onerror = function(error){
+		console.log(error);
+	}	
+	
+	TEMP_FEATURE_DATABASE.clear(onsuccess, onerror);
+}
+
+// DEBUG only call from console
+function clearAllDB(){
+	clearDB();
+	clearFeatureDB();
+	clearTempFeatureDB();
 }
 
 // used for debugging, dump all local storage to the console
@@ -312,6 +361,10 @@ function getDatabase(){
 
 function getFeatureDatabase(){
 	return FEATURE_DATABASE;
+}
+
+function getTempFeatureDatabase(){
+	return TEMP_FEATURE_DATABASE;
 }
 
 /**
