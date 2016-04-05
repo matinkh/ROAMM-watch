@@ -179,11 +179,14 @@ function writeDataToFile(newFile, data) {
 		console.log("[Matin] writeDataToFile started...");
 		if(newFile != null) {
 			newFile.openStream("a", onOpenStream, function(error) {
-				console.log("[Matin] Could not create the file.");
-				console(error);
+				console.log("[Matin] Could not open file stream.");
+				console.log(error);
 			}, "UTF-8");
 
 			function onOpenStream(fs) {
+				
+				console.log("fs", fs, data, newFile);
+				
 				var jsonString = JSON.stringify(data);
 				fs.write(JSON.stringify(data));
 				console.log("[Matin] this is the data to be written [dataToFile]>>>\n" + jsonString);
@@ -194,7 +197,6 @@ function writeDataToFile(newFile, data) {
 			console.log("[Matin] no file here to write into!...");
 		}
 		console.log("[Matin] writeDataToFile ended!!!");
-		//clearDB();
 	} catch (exception) {
 		console.log("[Matin] [Exception] " + exception.message);
 	}
@@ -202,33 +204,50 @@ function writeDataToFile(newFile, data) {
 
 function writeDatabasesToFile(data, filename){
 	d = new Date();
+	var documentsDir;
 	console.log("writeDatabasesToFile started...");
 	tizen.filesystem.resolve("documents", onDocumentResolve, function(error) {
 		console.log("Could not resolve documents folder.");
 		console.log(error);
 	});
 
-	function onDocumentResolve(documentsDir) {
+	function onDocumentResolve(result) {
 		console.log("Documents folder resolved...");
+		documentsDir = result;
 		var newFilePath = "ROAMM";
 		var newFilename = filename + "_" + d.toString().replace(/:| /g, "_") +".txt";
+		var newFile;
+		var newDir;
 		
-		tizen.filesystem.resolve("documents/" + newFilePath, onRoamResolve, function(error){
-			console.log("ROAMM folder could not be resolved. It should be created...");
-			var newDir = documentsDir.createDirectory(newFilePath);
-			console.log("(" + newFilePath + ") folder is created.");
-			d = new Date();
-			var newFile = newDir.createFile(newFilename);
+		tizen.filesystem.resolve("documents/" + newFilePath,
 			
-			console.log("New file is created.");
-			writeDataToFile(newFile, data);
-		});
-		
-		function onRoamResolve(roamResult) {
-			console.log("ROAMM folder is resolved. So just create the file!");
-			var newFile = roamResult.createFile(newFilename);
-			console.log("[Matin] New file is created.");
-			writeDataToFile(newFile, data);
-		};
+			function (roamResult) {	
+			
+				console.log(roamResult);
+							
+				console.log("ROAMM folder is resolved. So just create the file!");
+				newFile = roamResult.createFile(newFilename);
+				console.log("[Matin] New file is created.");
+				
+				console.log("newfile", newFile);
+				
+				writeDataToFile(newFile, data);
+			}, 
+				
+			function(error){
+				console.log("ROAMM folder could not be resolved. It should be created...");
+				newDir = documentsDir.createDirectory(newFilePath);
+				console.log("(" + newFilePath + ") folder is created.");
+				
+				console.log(newDir);
+				
+				newFile = newDir.createFile(newFilename);
+				
+				console.log("New file is created.");
+				
+				console.log("newFile", newFile);
+				writeDataToFile(newFile, data);
+			}, "a");
+		;
 	}
 }

@@ -216,14 +216,17 @@ function saveRawAndFeatureDataToFile(){
 	onsuccessRaw = function(array){
 		console.log("writing raw data to file");
 		writeDatabasesToFile(array, "rawData");
+		clearDB();
 	},
 	onsuccessFeature = function(array){
 		console.log("writing feature data to file");
 		writeDatabasesToFile(array, "featureData");
+		clearFeatureDB();
 	},
 	onsuccessTempFeature = function(array){
 		console.log("writing temp feature data to file");
 		writeDatabasesToFile(array, "tempFeatureData");
+		clearTempFeatureDB();
 	},
 	onerror = function(error){
 		console.log("failed to get DB");
@@ -233,8 +236,5 @@ function saveRawAndFeatureDataToFile(){
 	featureDB.getAll(onsuccessFeature, onerror);
 	tempFeatureDB.getAll(onsuccessTempFeature, onerror);
 	
-	clearDB();
-	clearFeatureDB();
-	clearTempFeatureDB();
 }
 

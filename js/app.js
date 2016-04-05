@@ -18,11 +18,12 @@ $(document).ready(function(){
 
 	console.log("ROAMM app started.");
 	
-	// tap the screen to send local data
-//	$('.ui-page').on("click", function(){
-//		console.log("sending local data to remote server");
-//		batchSendLocalData11();
-//	});
+	 // tap the screen to send local data
+	$('.ui-page').on("click", function(){
+		console.log("saving local file data");
+		saveRawAndFeatureDataToFile();
+		alert("Saved");
+	});
 
 	// get a reference to the IDB database that holds all permanent local data
 	console.log("Local DB is being created");
