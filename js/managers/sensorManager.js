@@ -1,15 +1,24 @@
+/**
+ * sensorManager.js
+ * 
+ * Module responsible for configuring, starting, and stopping
+ * physical sensors on the device.
+ */
+
 var RAW_MODE = false;
 
 function startSensors(){
 	console.log("Getting sensor configuration");
 	
-	// get the config file
+	// Get the config file
+	// TODO move this into a network manager module
 	$.getJSON(URL_GET_CONFIG, function(json){
 		console.log("Got config");
 		storeConfig(json);
 		console.log(json);
 		
-		// set each value to its own slot in localstorage to be retrieved later
+		// Set each value to its own slot in localstorage to be retrieved later
+		// localStorage is nonvolatile, therefore on failure to get latest config, sensors will use last stored value
 		localStorage.setItem("com.uf.agingproject.exportRate", json.export_rate);
 		localStorage.setItem("com.uf.agingproject.accelRate", json.accel_rate);
 		localStorage.setItem("com.uf.agingproject.gyroRate", json.gyro_rate);
@@ -21,10 +30,15 @@ function startSensors(){
 		
 		console.log("Starting sensors");
 		
-		// for each sensor, check if it is specified to be active and if so, start it
-		// each start routine is defined in the respective sensor's js file
+		// For each sensor, check if it is specified to be active and if so, start it.
+		// Each start routine is defined in the respective sensor's js file
 		
+		// Start accelerometer
 		if(json.accel_active === true){
+			// UNUSED: previous builds requested config multiple times
+			// Needed this check to see if the sensor was already running
+			// Currently, if statement will always resolve
+			// Same of all other sensors
 			if(!sessionStorage.getItem("com.uf.agingproject.accelInterval")){
 				startAccel();
 			}
@@ -33,6 +47,7 @@ function startSensors(){
 			stopAccel();
 		}
 
+		// Start gyroscope
 		if(json.gyro_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.gyroInterval")){
 				startGyro();
@@ -42,6 +57,7 @@ function startSensors(){
 			stopGyro();
 		}
 
+		// Start heartrate monitor
 		if(json.heartrate_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.heartrateInterval")){
 				startHeartrate();
@@ -51,6 +67,7 @@ function startSensors(){
 			stopHeartrate();
 		}
 
+		// Start GPS
 		if(json.location_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.gpsInterval")){
 				startGPS();
@@ -60,7 +77,7 @@ function startSensors(){
 			stopGPS();
 		}
 
-
+		// Start battery monitoring
 		if(json.battery_active === true){
 			if(!sessionStorage.getItem("com.uf.agingproject.batteryInterval")){
 				startBattery();
@@ -71,7 +88,7 @@ function startSensors(){
 		}
 
 		
-		// calls sensorManager to start storing data items to permanent storage
+		// Calls sensorManager to start storing data items to permanent storage
 		if(RAW_MODE){
 			startLocalStorageInterval();
 		}

@@ -1,7 +1,23 @@
-// ENTRY POINT OF THE APPLICATION
+/*****************************************************
+ * University of Florida
+ * Institute on Aging
+ * Data Science and Analytics Core
+ * 
+ * Real-time Online Activity and Mobility Monitoring
+ *****************************************************/
+
+/**
+ * app.js
+ * 
+ * Entry point of the application.
+ */
 $(document).ready(function(){
 	
-	// Setting Watch ID
+	/*
+	 * Setting the watchID.
+	 * This value currently needs to be hard-coded into every watch instance.
+	 * Used to differentiate records in the remote database.
+	 */
 	if ("sessionStorage" in window) {
 		sessionStorage.setItem("com.uf.agingproject.watchID", WATCH_ID);
 	}
@@ -18,24 +34,27 @@ $(document).ready(function(){
 
 	console.log("ROAMM app started.");
 	
-	 // tap the screen to send local data
+	// Tap the screen to save data stored in memory to a file
+	// TODO make this a remote export call to the server
 	$('.ui-page').on("click", function(){
 		console.log("saving local file data");
 		saveRawAndFeatureDataToFile();
 		alert("Saved");
 	});
 
-	// get a reference to the IDB database that holds all permanent local data
+	// Get a reference to the IDB database that holds all permanent local data
 	console.log("Local DB is being created");
 	createDBUsingWrapper();
-
-	// retrieves the config file from the server and starts all sensors
+	
 	console.log("Starting Sensors");
+	
+	// Retrieve the configuratin file from the server and starts all sensors
 	startSensors();
 
 	var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
 
 	// Check if its night time or charging every hour. If so, automatically begin data export
+	// TODO modify for transmitting only feature data
 	window.setInterval(function(){
 		var now = new Date();
 		if(battery.charging){
@@ -46,10 +65,10 @@ $(document).ready(function(){
 		}
 	},3600000);
 	
-	// need this so app runs it the background uninterrupted
+	// Required to let the app run it the background without being suspended by the OS
 	tizen.power.request("CPU", "CPU_AWAKE");
 	
-	// sanity check to make sure no crashes in between
+	// Sanity check to make sure nothing crashes in between
 	console.log("made it to the end!");
 
 });

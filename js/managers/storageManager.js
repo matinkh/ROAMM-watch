@@ -1,10 +1,20 @@
-// Global database reference to store Item Objects
+/**
+ * storageManager
+ * 
+ * Module responsible for storing data values into temporary and permanent storage.
+ * Also defines data objects (Item, Features).
+ */
+
+// Global database reference to store Item Objects and raw values
 var RAW_DATABASE;
+
+// Global database reference to store Feature Objects and computer feature values
 var FEATURE_DATABASE;
 
 // TODO remove, this is only for validation of smallwindow values
 var TEMP_FEATURE_DATABASE;
 
+// Object representing processed data
 function Features(){
 	this.mvm = null;
 	this.sdvm = null;
@@ -17,7 +27,7 @@ function Features(){
 	this.timestamp = null;
 }
 
-// Structure of a single data item
+// Structure of a single data item representing raw data
 function Item(){
 	this.steps = null;
 	this.heartrate = null;
@@ -38,6 +48,10 @@ function Item(){
 }
 
 
+/**
+ * Saves a provided heartrate into temporary storage
+ * @param heartrate
+ */
 function saveHeartrate(heartrate){
 	if ("sessionStorage" in window) {
 		sessionStorage.setItem("com.uf.agingproject.heartrate", heartrate);
@@ -47,6 +61,9 @@ function saveHeartrate(heartrate){
 	}
 }
 
+/**
+ * 
+ */
 function clearHeartrate(){
 	if ("sessionStorage" in window) {
 		sessionStorage.removeItem("com.uf.agingproject.heartrate");
@@ -56,6 +73,10 @@ function clearHeartrate(){
 	}
 }
 
+/**
+ * 
+ * @param accel
+ */
 function saveAccel(accel){
 	if ("sessionStorage" in window) {
 		sessionStorage.setItem("com.uf.agingproject.accelX", accel[0]);
@@ -67,6 +88,9 @@ function saveAccel(accel){
 	}
 }
 
+/**
+ * 
+ */
 function clearAccel(){
 	if ("sessionStorage" in window) {
 		sessionStorage.removeItem("com.uf.agingproject.accelX");
@@ -78,6 +102,10 @@ function clearAccel(){
 	}
 }
 
+/**
+ * 
+ * @param gyro
+ */
 function saveGyro(gyro){
 	if ("sessionStorage" in window) {
 		sessionStorage.setItem("com.uf.agingproject.gyroA", gyro[0]);
@@ -89,6 +117,9 @@ function saveGyro(gyro){
 	}
 }
 
+/**
+ * 
+ */
 function clearGyro(){
 	if ("sessionStorage" in window) {
 		sessionStorage.removeItem("com.uf.agingproject.gyroA");
@@ -100,6 +131,10 @@ function clearGyro(){
 	}
 }
 
+/**
+ * 
+ * @param coords
+ */
 function saveCoordinates(coords){
 	if ("sessionStorage" in window) {
 		sessionStorage.setItem("com.uf.agingproject.locLat", coords[0]);
@@ -110,6 +145,9 @@ function saveCoordinates(coords){
 	}
 }
 
+/**
+ * 
+ */
 function clearCoordinates(){
 	if ("sessionStorage" in window) {
 		sessionStorage.removeItem("com.uf.agingproject.locLat");
@@ -120,6 +158,10 @@ function clearCoordinates(){
 	}
 }
 
+/**
+ * 
+ * @param battery
+ */
 function saveBattery(battery){
 	if ("sessionStorage" in window) {
 		sessionStorage.setItem("com.uf.agingproject.battery", battery);
@@ -129,6 +171,9 @@ function saveBattery(battery){
 	}
 }
 
+/**
+ * 
+ */
 function clearBattery(){
 	if ("sessionStorage" in window) {
 		sessionStorage.removeItem("com.uf.agingproject.battery");
@@ -138,7 +183,9 @@ function clearBattery(){
 	}
 }
 
-// clear everything but battery, since its OK to hold the previous value
+/**
+ * Clears everything but battery, since its OK to hold the previous value.
+ */
 function clearSessionData(){
 	clearAccel();
 	//clearBattery();
@@ -147,10 +194,17 @@ function clearSessionData(){
 	clearHeartrate();
 }
 
+/**
+ * 
+ * @param json
+ */
 function storeConfig(json){
 	localStorage.setItem("com.uf.agingproject.config", JSON.stringify(json));
 }
 
+/**
+ * 
+ */
 function storeData(){
 	
 	var item = Object.create(Item.prototype);
@@ -180,7 +234,10 @@ function storeData(){
 
 }
 
-// Move raw data stored in sessionStorage to localStorage every x seconds
+
+/**
+ * Moves raw data stored in sessionStorage to localStorage every x seconds
+ */
 function startLocalStorageInterval(){
 	var rate =  parseInt(localStorage.getItem("com.uf.agingproject.exportRate"));
 	var manualRate = 60 * 1000; // Sample at every second
@@ -192,9 +249,12 @@ function startLocalStorageInterval(){
 	}, manualRate);
 }
 
-// Get the DB instance existing on the watch
-// This will only actually create a new one if one doesnt already exist
-// Else it will retrieve the existing one
+
+/**
+ * Get the DB instance existing on the watch.
+ * This will only actually create a new one if one doesn't already exist.
+ * Else it will retrieve the existing one.
+ */
 function createDBUsingWrapper(){
 	RAW_DATABASE = new IDBStore({
 		dbVersion: 1,
@@ -228,7 +288,13 @@ function createDBUsingWrapper(){
 	});
 }
 
-// insert a single item to the database
+// 
+
+/**
+ * Insert a single item to the raw database.
+ * 
+ * @param item Object
+ */
 function addToDB(item){
  
 	var onsuccess = function(id){
@@ -241,6 +307,11 @@ function addToDB(item){
 	RAW_DATABASE.put(item, onsuccess, onerror);
 }
 
+/**
+ * Insert a single item to the feature database.
+ * 
+ * @param item Object
+ */
 function addFeatureItemToDB(item){
 	var onsuccess = function(id){
 		//console.log('Data is added: ' + id);
@@ -253,6 +324,11 @@ function addFeatureItemToDB(item){
 }
 
 // TODO remove
+/**
+ * Insert a single item to the temp feature database.
+ * 
+ * @param item Object
+ */
 function addTempFeatureItemToDB(item){
 	var onsuccess = function(id){
 		//console.log('Data is added: ' + id);
@@ -264,8 +340,10 @@ function addTempFeatureItemToDB(item){
 	TEMP_FEATURE_DATABASE.put(item, onsuccess, onerror);
 }
 
-// clears all items in the database
-// called by export manager after a successful transfer
+/**
+ * Clears all items in the raw database.
+ * Called by export manager after a successful transfer.
+ */
 function clearDB(){
 	console.log("Clearing raw Storage");
 	

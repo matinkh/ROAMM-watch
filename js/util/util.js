@@ -1,4 +1,14 @@
-// used to format timestamps into a postgres database friendly format
+/**
+ * util.js
+ * 
+ * Utility and misc functions
+ */
+
+
+/**
+ * Returns the current Date object into a postgres database friendly timestamp format
+ * @returns {String}
+ */
 function formatLocalDate() {
 	var now = new Date(),
 	tzo = -now.getTimezoneOffset(),
