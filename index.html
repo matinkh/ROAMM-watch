@@ -2,65 +2,44 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,user-scalable=no" />
-<title>Wearable UI</title>
+<title>ROAMM</title>
 <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.min.css">
-<!-- load theme file for your application -->
 <link rel="stylesheet" href="css/style.css">
-
-<!-- load javascript file for your application -->
-<!--  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
-
 <script type="text/javascript" src="lib/jquery/jquery-1.11.2.js"></script>
 
 </head>
 <body>
-	<div class="ui-page ui-page-active" id="main">
-		<!--  
-		<header class="ui-header">
-			<h2 class="ui-title">Wearable UI</h2>
-		</header> -->
-		<div class="ui-content content-padding">
-
+	<div class="main">
+		<div class="content-padding">
 			<div class="dataItem">
-				<span class="title">Steps</span> <span class="value" id="steps">0</span>
-			</div>
-
-			<div class="dataItem">
-				<span class="title">Coordinates</span> <span class="value"
+				<span class="title">GPS</span> <span class="value"
 					id="coordinates">0,0</span>
 			</div>
 			<div class="dataItem">
-				<span class="title">Accelerometer</span> <span class="value"
+				<span class="title">Accel</span> <span class="value"
 					id="accel">0,0,0</span>
 			</div>
 
 			<div class="dataItem">
-				<span class="title">Gyroscope</span> <span class="value" id="gyro">0,0,0</span>
+				<span class="title">Gyro</span> <span class="value" id="gyro">0,0,0</span>
 			</div>
 
 			<div class="dataItem">
-				<span class="title">Heart Rate</span> <span class="value"
-					id="heartrate">0</span><div id="hrmActive" style="height: 10px; width: 10px; background: black"></div>
+				<span class="title">HRM</span> 
+				<span class="value" id="heartrate">0</span>
+				<div class="square" id="hrmActive" style="height: 10px; width: 10px; background: black"></div>
 			</div>
-
-			<div class="dataItem">
-				<span class="title">UV Index</span> <span class="value" id="uv">0</span>
-			</div>
-
-			<div class="dataItem">
-				<span class="title">Pressure</span> <span class="value"
-					id="pressure">0</span>
-			</div>
+			
 			<div class="dataItem">
 				<span class="title">Battery</span> <span class="value" id="battery">0</span>
 			</div>
 
-			<div id="status" style="height: 30px; width: 30px; background: black"></div>
-			
-			<div>v 1.0</div>
-
+			<div class="dataItem"> 
+  			<span class="title">Status</span>
+  			<div id="status" class="square" style="height: 10px; width: 10px; background: black"></div>
+			</div>
+			<!-- <div>v 1.0</div> -->
 		</div>
-
 	</div>
 </body>
 

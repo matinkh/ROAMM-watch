@@ -36,7 +36,7 @@ $(document).ready(function(){
 	
 	// Tap the screen to save data stored in memory to a file
 	// TODO make this a remote export call to the server
-	$('.ui-page').on("click", function(){
+	$('.main').on("click", function(){
 		console.log("saving local file data");
 		saveRawAndFeatureDataToFile();
 		alert("Saved");

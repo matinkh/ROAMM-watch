@@ -1,10 +1,8 @@
-* {
-    font-family: Verdana, Lucida Sans, Arial, Helvetica, sans-serif;
-}
-
 body {
     margin: 0px auto;
     background-color:#222;
+    font-family: Verdana, Lucida Sans, Arial, Helvetica, sans-serif;
+    padding-top: 20px;
 }
 
 .contents {
@@ -16,16 +14,12 @@ body {
 }
 
 .content-padding {
+  vertical-align: middle;
+  text-align: center;
 	margin-top: 16px;
 	margin-bottom: 16px;
 	padding-left: 16px;
 	padding-right: 16px;
-}
-
-.content_text {
-	font-weight:bold;
-	font-size:5em;
-	color:#fff;
 }
 
 .tile .title {
@@ -43,4 +37,9 @@ body {
     width: 100%;
     font-weight: bold;
     word-spacing: -.25em;
+}
+
+.square {
+  margin: auto;
+  display: inline-block;
 }
