@@ -7,11 +7,7 @@ var STRENGTH = [];
 var FREQUENCIES = [];
 var DF_IDX = -1;
 
-// Rate of raw data collection in Hz
-var COLLECTION_FREQUENCY = 10.0;
-
-/**
- * 
+/** 
  * @param rawData {timestamp:Date, x:float, y:float, z:float}
  * @returns
  */
