@@ -17,7 +17,6 @@
     <preference name="accelActive" value="1" readonly="true"/>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/healthinfo"/>
-    <tizen:privilege name="http://developer.samsung.com/privilege/healthinfo"/>
     <tizen:privilege name="http://tizen.org/privilege/location"/>
     <tizen:privilege name="http://tizen.org/privilege/time"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
@@ -28,6 +27,7 @@
     <tizen:privilege name="http://tizen.org/privilege/content.write"/>
     <tizen:privilege name="http://tizen.org/privilege/content.read"/>
     <tizen:privilege name="http://tizen.org/privilege/power"/>
+    <tizen:privilege name="http://tizen.org/privilege/unlimitedstorage"/>
     <tizen:profile name="wearable"/>
     <tizen:setting background-support="enable" encryption="disable" hwkey-event="enable"/>
     <tizen:setting hwkey-event="enable"/>

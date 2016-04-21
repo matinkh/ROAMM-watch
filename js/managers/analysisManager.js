@@ -1,20 +1,13 @@
 /**
  * Analysis Manager
- * @param rawData
+ * 
  */
 
 var STRENGTH = [];
 var FREQUENCIES = [];
-var ONE_EIGHTY_OVER_PI = 180 / Math.PI;
-var dfIdx = -1;
+var DF_IDX = -1;
 
-//var P625 = [];
-
-var ONE_EIGHTY_OVER_PI = 180 / Math.PI;
-var POINTS_IN_WINDOW = 450;
-
-/**
- * 
+/** 
  * @param rawData {timestamp:Date, x:float, y:float, z:float}
  * @returns
  */
@@ -60,7 +53,7 @@ function processData(rawData) {
     });
 
     // Generate frequency vector
-    var scale = 30.0 / strength.length;
+    var scale = COLLECTION_FREQUENCY / strength.length;
     for (var i = 0; i < strength.length; i++) {
         frequencies[i] = i * scale;
     }
@@ -240,17 +233,18 @@ function getFpdf(mags, dfIdx) {
 
     var numSum = mags[dfIdx];
 
-    // left 2 points
-    var i = dfIdx - 1;
-    while (i >= 0 && dfIdx - i < 3) {
-        numSum += mags[i--];
-    }
-
-    // right 2 points
-    i = dfIdx + 1;
-    while (i < mags.length && i - dfIdx < 3) {
-        numSum += mags[i++];
-    }
+    // For higher frequencies, would like to include points around dominant frequency
+//    // left 2 points
+//    var i = dfIdx - 1;
+//    while (i >= 0 && dfIdx - i < 3) {
+//        numSum += mags[i--];
+//    }
+//
+//    // right 2 points
+//    i = dfIdx + 1;
+//    while (i < mags.length && i - dfIdx < 3) {
+//        numSum += mags[i++];
+//    }
 
     return numSum / sumStrength;
 
